@@ -1,6 +1,6 @@
 ## Install
 
-    git clone https://github.com/kerfiguetteb/ECF-symfony
+    git clone https://github.com/kerfiguetteb/ECF-daishi.git
     cd src-symfony-p8
     composer install
 

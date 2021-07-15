@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Livre;
 use App\Repository\LivreRepository;
 use App\Repository\EmprunteurRepository;
 use App\Repository\AuteurRepository;
@@ -43,7 +42,7 @@ class TestController extends AbstractController
     // - les données de l'utilisateur dont l'email est `foo.foo@example.com`
         $email = 'foo.foo@example.com';
         $users = $userRepository->findByEmail($email);
-        // dump($users);
+        dump($users);
 
     // - les données des utilisateurs dont l'attribut `roles` contient le mot clé `ROLE_EMRUNTEUR`
         // $emprunteurRoles = $userRepository->findByRole('ROLE_EMPRUNTEUR');
@@ -70,21 +69,22 @@ class TestController extends AbstractController
         // dump($livres);
 
     // - la liste des livres dont le genre contient le mot clé `roman`
-        $livres = $genreRepository->findByNom('roman');
-        // dump($livres);
- 
-    //- ajouter un nouveau livre
-        $auteurs = $auteurRepository->findAll();
-        $auteur = $auteurs[1]->setNom('Cartier');
-        $auteur = $auteurs[1]->setPrenom('Huges');
-    
-        $livre->setTitre('Totum autem id externum');
-        $livre->setAnneeEdition(2020);
-        $livre->setNombrePages(300);
-        $livre->setCodeIsbn(9790412882714);
-        $livre->setAuteur($auteur);
+
+        $livre = $livreRepository->findByGenre("roman");
         dump($livre);
-        $entityManager->flush();
+ 
+    // //- ajouter un nouveau livre
+        // $auteurs = $auteurRepository->findAll();
+        // $auteur = $auteurs[1]->setNom('Cartier');
+        // $auteur = $auteurs[1]->setPrenom('Huges');
+    
+        // $livre->setTitre('Totum autem id externum');
+        // $livre->setAnneeEdition(2020);
+        // $livre->setNombrePages(300);
+        // $livre->setCodeIsbn(9790412882714);
+        // $livre->addAuteur($auteur);
+        // dump($livre);
+        // $entityManager->flush();
    
     
         
@@ -117,17 +117,16 @@ class TestController extends AbstractController
 // Requêtes de lecture :
 
 
-// - les données de l'emprunteur dont l'id est `3`
-        $emprunteur = $emprunteurRepository->find(3);
 
-// - les données de l'emprunteur qui est relié au user dont l'id est `3`
 // - liste complète des emprunteurs
-        // $emprunteurs = $emprunteurRepository->findAll();
-        // $users = $userRepository->findAll();
-        // $user3 = $users[2]; 
-        // foreach ($users->getUser() as $emprunteurUser3) {
-        //     dump($emprunteurUser3);
-        // }
+        $emprunteur = $emprunteurRepository->findAll();
+        $emprunteur = $emprunteur[2];
+        $user = $emprunteur->getUser();
+// - les données de l'emprunteur qui est relié au user dont l'id est `3`
+        dump($user);
+// - les données de l'emprunteur dont l'id est `3`
+        dump($emprunteur);
+
 
 // - la liste des emprunteurs dont le nom ou le prénom contient le mot clé `foo`
 

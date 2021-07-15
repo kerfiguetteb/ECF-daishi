@@ -22,19 +22,20 @@ class LivreRepository extends ServiceEntityRepository
     // /**
     //  * @return Livre[] Returns an array of Livre objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findByGenre(string $genre)
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        ->innerJoin('l.genres','g')
+        ->andWhere('g.nom LIKE :genre')
+        ->setParameter('genre', "%{$genre}%")
+        ->orderBy('l.id', 'ASC')
+        // ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
         ;
     }
-    */
+    
+    
 
     /*
     public function findOneBySomeField($value): ?Livre
