@@ -19,22 +19,78 @@ class EmpruntRepository extends ServiceEntityRepository
         parent::__construct($registry, Emprunt::class);
     }
 
-    // /**
-    //  * @return Emprunt[] Returns an array of Emprunt objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Emprunt[] Returns an array of Emprunt objects
+     */
+    
+    public function findByEmprunteur($value)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('E')
+            ->innerJoin('E.emprunteur', 'e')
+            ->andWhere('e.id = :value')
+            ->setParameter('value', $value)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
+    public function findByLivre($value)
+    {
+        return $this->createQueryBuilder('l')
+            ->innerJoin('l.livre', 'e')
+            ->andWhere('e.id = :value')
+            ->setParameter('value', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByDateRetour($value)
+    {
+        // Récupération d'un query builder.
+        
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date_retour < :value')
+            ->setParameter('value', $value)
+            // ->orderBy('e.date_creation', 'ASC')
+            // Récupération d'une requête qui n'attend qu'à être exécutée.
+            ->getQuery()
+            // Exécution de la requête.
+            // Récupération d'un tableau de résultat.
+            // Ce tableau peut contenir, zéro, un ou plusieurs lignes.
+            ->getResult()
+        ;
+    }
+    public function findByDateRetourNull($value)
+    {
+        // Récupération d'un query builder.
+        
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date_retour = :value')
+            ->setParameter('value', $value)
+            // ->orderBy('e.date_creation', 'ASC')
+            // Récupération d'une requête qui n'attend qu'à être exécutée.
+            ->getQuery()
+            // Exécution de la requête.
+            // Récupération d'un tableau de résultat.
+            // Ce tableau peut contenir, zéro, un ou plusieurs lignes.
+            ->getResult()
+        ;
+    }
+
+
+    // public function findByExampleField($value)
+    // {
+    //     return $this->createQueryBuilder('e')
+    //         ->andWhere('e.exampleField = :val')
+    //         ->setParameter('val', $value)
+    //         ->orderBy('e.id', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+    
 
     /*
     public function findOneBySomeField($value): ?Emprunt

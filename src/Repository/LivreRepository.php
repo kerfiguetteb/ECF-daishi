@@ -34,6 +34,33 @@ class LivreRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
+    public function findByAuteur($value)
+    {
+        return $this->createQueryBuilder('l')
+            ->innerJoin('l.auteur', 'a')
+            ->andWhere('a.id = :value')
+            ->setParameter('value', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    public function findByTitre(string $value)
+    {
+        $qb = $this->createQueryBuilder('l');
+       
+        return $qb->where($qb->expr()->orX(
+            $qb->expr()->like('l.titre', ':value'),
+        ))
+        ->setParameter('value', "%{$value}%")
+        ->orderBy('l.titre', 'ASC')
+        // ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     
     
 

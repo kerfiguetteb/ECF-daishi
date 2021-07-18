@@ -337,9 +337,9 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         $emprunt = new Emprunt();
         $emprunt->setDateEmprunt(\DateTime::createFromFormat('Y-m-d H:i:s', '2020-03-01 10:00:00'));
         $date_emprunt = $emprunt->getDateEmprunt();
-        $date_retour = \DateTime::createFromFormat('Y-m-d H:i:s', $date_emprunt->format('Y-m-d H:i:s'));
-        $date_retour->add(new \DateInterval('P1M'));
-        $emprunt->setDateRetour($date_retour);
+        // $date_retour = \DateTime::createFromFormat('Y-m-d H:i:s', $date_emprunt->format('Y-m-d H:i:s'));
+        // $date_retour->add(new \DateInterval('P1M'));
+        // $emprunt->setDateRetour($date_retour);
         $emprunt->setEmprunteur($emprunteur);               
         $emprunt->setLivre($livre);               
         $manager->persist($emprunt);

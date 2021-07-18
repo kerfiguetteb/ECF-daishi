@@ -26,27 +26,27 @@ class EmpruntController extends AbstractController
             'emprunt' => $empruntRepository->findAll(),
         ]);
     }
-    // public function new(Request $request): Response
-    // {
-    //     $emprunt = new Emprunt();
-    //     $form = $this->createForm(EmpruntType::class, $emprunt);
-    //     $form->handleRequest($request);
+    public function new(Request $request): Response
+    {
+        $emprunt = new Emprunt();
+        $form = $this->createForm(EmpruntType::class, $emprunt);
+        $form->handleRequest($request);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $entityManager = $this->getDoctrine()->getManager();
-    //         $entityManager->persist($emprunt);
-    //         $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($emprunt);
+            $entityManager->flush();
 
-    //         return $this->redirectToRoute('emprunt_show', [
-    //             'id' => $emprunt->getId(),
-    //         ]);
-    //     }
+            return $this->redirectToRoute('emprunt_show', [
+                'id' => $emprunt->getId(),
+            ]);
+        }
 
-    //     return $this->render('emprunt/new.html.twig', [
-    //         'emprunt' => $emprunt,
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
+        return $this->render('emprunt/new.html.twig', [
+            'emprunt' => $emprunt,
+            'form' => $form->createView(),
+        ]);
+    }
 
 
 }
